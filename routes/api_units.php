@@ -25,5 +25,5 @@ Route::prefix('v1')->group(function () {
     Route::get('unit-types/{unitType}', [UnitTypeApiController::class, 'show']);
 
     Route::get('cities', [CityApiController::class, 'index']);
-    Route::get('cities/{city}', [CityApiController::class, 'show']);
+    Route::get('cities/{city}', [CityApiController::class, 'show']); 
 });
