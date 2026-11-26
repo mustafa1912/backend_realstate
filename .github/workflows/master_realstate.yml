@@ -64,5 +64,5 @@ jobs:
         with:
           app-name: 'realstate'
           slot-name: 'Production'
-          package: release.zip
+          package: release.zip 
           
