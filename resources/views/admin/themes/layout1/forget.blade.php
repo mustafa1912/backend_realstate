@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if IE 8]> <html lang="{{GetLanguage()}}" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="{{GetLanguage()}}" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en" dir="{{GetDirection()}}">
+<html lang="{{GetLanguage()}}" dir="{{GetDirection()}}">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
 
     <head>
         <meta charset="utf-8" />
-        <title>{{ @SettingsByLang('name',GetLanguage() ) }}</title>
+        <title>{{ trans('orbscope.forget_password') }} || {{ trans('orbscope.brand_name') }}</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#07101b" />
         <meta content="{{ @SettingsByLang('description',GetLanguage() ) }}" name="description" />
         <meta content="{{ @SettingsByLang('keywords',GetLanguage() ) }}" name="keywords" />
-        <meta content="OrbScope Co." name="author" />
+        <meta content="{{ trans('orbscope.brand_full_name') }}" name="author" />
 
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         {!! Html::style('orbscope/admin/assets/global/plugins/font-awesome/css/font-awesome.min.css') !!}
@@ -26,7 +27,6 @@
         {!! Html::style('orbscope/admin/assets/global/css/components-rtl.min.css') !!}
         {!! Html::style('orbscope/admin/assets/global/css/plugins-rtl.min.css') !!}
         @else
-
         {!! Html::style('orbscope/admin/assets/global/plugins/bootstrap/css/bootstrap.min.css') !!}
         {!! Html::style('orbscope/admin/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') !!}
         {!! Html::style('orbscope/admin/assets/global/css/plugins.min.css') !!}
@@ -38,41 +38,54 @@
         {!! Html::style('orbscope/admin/assets/global/custom.css') !!}
         @include(AdminTheme().'/login_color'.GetLangAdds())
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Cairo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+        <link href="{{ asset('css/daralomran-theme.css') }}?v={{ file_exists(public_path('css/daralomran-theme.css')) ? filemtime(public_path('css/daralomran-theme.css')) : 1 }}" rel="stylesheet" type="text/css"/>
 
-        <link rel="shortcut icon" href="{{url(GetSettings()->icon)}}" /> </head>
+        <link rel="shortcut icon" href="{{ asset('images/brand/favicon.ico') }}" />
+        <link rel="icon" type="image/png" href="{{ asset('images/brand/favicon.png') }}" />
+    </head>
     <!-- END HEAD -->
 
-    <body class=" login">
-        <!-- BEGIN LOGO -->
-        <div class="logo">
-            <a href="{{url('/')}}">
-                <img src="{{GetImage(GetSettings()->logo)}}" alt="" /> </a>
-        </div>
-        <!-- END LOGO -->
-        <!-- BEGIN LOGIN -->
-        <div class="content">
+    <body class="login dao-login">
+        <div class="dao-login-shell">
+            <!-- BEGIN LOGO -->
+            <div class="dao-login-brand">
+                <a href="{{url('/')}}" aria-label="{{ trans('orbscope.brand_full_name') }}">
+                    <img src="{{ asset('images/brand/logo-light.png') }}" alt="{{ trans('orbscope.brand_full_name') }}" />
+                </a>
+                <div class="dao-login-brand-eyebrow">{{ trans('orbscope.brand_eyebrow') }}</div>
+            </div>
+            <!-- END LOGO -->
 
-            <!-- BEGIN FORGOT PASSWORD FORM -->
-            <form action="{{ route('password.email') }}" method="post">
-                {{ csrf_field() }}
-                <h3 class="font-green">{{trans('orbscope.forget_password')}}</h3>
-                <p> {{trans('orbscope.forget_message')}} </p>
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="{{trans('orbscope.email')}}" name="email" />
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-actions forget-a">
-                    <a href="{{url('/').'/'.GetSettings()->admin_path.'/login'}}" class="btn green btn-outline">{{trans('orbscope.back')}}</a>
-                    <button type="submit" class="btn btn-success uppercase pull-right forget">{{trans('orbscope.submit_password')}}</button>
-                </div>
-            </form>
-            <!-- END FORGOT PASSWORD FORM -->
+            <!-- BEGIN FORGOT PASSWORD CARD -->
+            <div class="content dao-login-card">
+                <form action="{{ route('password.email') }}" method="post">
+                    {{ csrf_field() }}
+                    <h3 class="form-title">{{trans('orbscope.forget_password')}}</h3>
+                    <p class="dao-login-subtitle" style="margin-bottom: 18px;"> {{trans('orbscope.forget_message')}} </p>
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label class="dao-login-label">{{trans('orbscope.email')}}</label>
+                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="{{trans('orbscope.email')}}" name="email" />
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-actions" style="display: flex; gap: 10px; justify-content: space-between;">
+                        <a href="{{url('/').'/'.GetSettings()->admin_path.'/login'}}" class="btn default dao-btn-outline">{{trans('orbscope.back')}}</a>
+                        <button type="submit" class="btn dao-btn-gold uppercase">{{trans('orbscope.submit_password')}}</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="copyright dao-login-copyright">
+                &copy; {{ date('Y') }} <strong>{{ trans('orbscope.brand_full_name') }}</strong> &middot; {{ trans('orbscope.all_rights_reserved') }}
+            </div>
         </div>
-        <div class="copyright"> All Copyrights Reserved  © <a href="https://orbscope.com">OrbScope Co.</a>   2017 - @php echo date('Y', strtotime('+1 year')); @endphp . CRM </div>
+
         <!--[if lt IE 9]>
         {!! Html::script('orbscope/admin/assets/global/plugins/respond.min.js') !!}
         {!! Html::script('orbscope/admin/assets/global/plugins/excanvas.min.js') !!}
@@ -96,8 +109,6 @@
         {!! Html::script('orbscope/admin/assets/pages/scripts/login.js') !!}
         {!! Html::script('orbscope/admin/assets/global/plugins/bootstrap-sweetalert/sweetalert.js') !!}
         <!-- END PAGE LEVEL SCRIPTS -->
-        <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <!-- END THEME LAYOUT SCRIPTS -->
 
         <script>
             @if(session()->has('success'))
@@ -156,7 +167,6 @@
                     timer                  : "4000"
                 });
             @endif
-
         </script>
     </body>
 

@@ -41,42 +41,36 @@
                 </div>
 
                 <div class="portlet-body">
-                    <form role="form" method="get" action="{{url('admin/customer/search')}}" style="margin-bottom: 80px;">
-                        <div class="row">
-                            <div class="form-group" style="margin-bottom: 40px;">
-                                <label class="col-md-2 control-label" for="country_id">{{trans('orbscope.unit')}} </label>
-                                <div class="col-md-4">
-                                    <select class="form-control select2"  name="unit_id" id="unit" data-placeholder="{{trans('orbscope.unit')}}">
-                                        <option></option>
-                                        @foreach(\App\Models\Unit::all() as $country)
-                                            <option {{old('city_id')==$country->id?'selected':''}}   @if(isset($senders)) {{$senders['unit_id']== $country->id?'selected':''}}  @endif  value="{{$country->id}}">{{$country->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <label class="col-md-2 control-label" for="ar_address">{{trans('orbscope.nationality')}} </label>
-
-                                <div class="col-md-4">
-                                     <input @if(isset($senders)) value="{{$senders['nationality']}}" @endif type="text" name="nationality" class="form-control">
-                                </div>
+                    <form role="form" method="get" action="{{url('admin/customer/search')}}" class="dao-filter-form" style="margin-bottom: 24px; padding: 18px 20px; background: var(--dao-surface-subtle); border: 1px solid var(--dao-border); border-radius: 12px;">
+                        <div class="dao-form-grid" style="margin-bottom: 0; align-items: end;">
+                            <div class="dao-field">
+                                <label class="dao-field-label" for="unit">{{trans('orbscope.unit')}}</label>
+                                <select class="form-control select2" name="unit_id" id="unit" data-placeholder="{{trans('orbscope.unit')}}">
+                                    <option></option>
+                                    @foreach(\App\Models\Unit::all() as $country)
+                                        <option {{old('city_id')==$country->id?'selected':''}} @if(isset($senders)) {{$senders['unit_id']== $country->id?'selected':''}} @endif value="{{$country->id}}">{{$country->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="developer_id">{{trans('orbscope.customer_type')}} </label>
-                                <div class="col-md-4">
-                                    <select class="form-control" data-placeholder="{{trans('orbscope.customer_type')}}"   id="type" name="type">
-                                        <option value=""></option>
-                                        <option {{old('type')=='user'?'selected':''}}  @if(isset($senders)) {{$senders['type']=='user'?'selected':''}}  @endif value="user">{{trans('orbscope.user')}}</option>
-                                        <option {{old('type')=='owner'?'selected':''}} @if(isset($senders)) {{$senders['type']=='owner'?'selected':''}}  @endif value="owner">{{trans('orbscope.owner')}}</option>
-                                        <option {{old('type')=='guard'?'selected':''}} @if(isset($senders)) {{$senders['type']=='guard'?'selected':''}}  @endif value="guard">{{trans('orbscope.guard')}}</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-6" style="text-align: center;">
-                                    <button type="submit" class="btn green-meadow">{{trans('orbscope.search')}} <i class="fa fa-search"></i></button>
-                                </div>
+                            <div class="dao-field">
+                                <label class="dao-field-label" for="nationality">{{trans('orbscope.nationality')}}</label>
+                                <input id="nationality" @if(isset($senders)) value="{{$senders['nationality']}}" @endif type="text" name="nationality" class="form-control" placeholder="{{trans('orbscope.nationality')}}">
                             </div>
-
+                            <div class="dao-field">
+                                <label class="dao-field-label" for="type">{{trans('orbscope.customer_type')}}</label>
+                                <select class="form-control" data-placeholder="{{trans('orbscope.customer_type')}}" id="type" name="type">
+                                    <option value="">{{trans('orbscope.all')}}</option>
+                                    <option {{old('type')=='user'?'selected':''}} @if(isset($senders)) {{$senders['type']=='user'?'selected':''}} @endif value="user">{{trans('orbscope.user')}}</option>
+                                    <option {{old('type')=='owner'?'selected':''}} @if(isset($senders)) {{$senders['type']=='owner'?'selected':''}} @endif value="owner">{{trans('orbscope.owner')}}</option>
+                                    <option {{old('type')=='guard'?'selected':''}} @if(isset($senders)) {{$senders['type']=='guard'?'selected':''}} @endif value="guard">{{trans('orbscope.guard')}}</option>
+                                </select>
+                            </div>
+                            <div class="dao-field" style="justify-content: flex-end;">
+                                <button type="submit" class="btn green-meadow dao-btn-gold" style="height: 44px; width: 100%; max-width: 220px;">
+                                    <i class="fa fa-search"></i> {{trans('orbscope.search')}}
+                                </button>
+                            </div>
                         </div>
-
                     </form>
                     {!! Form::open([
                        'method' => 'post',

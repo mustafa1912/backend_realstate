@@ -11,15 +11,15 @@
 
 
 
-        <div style="margin: 10px;padding: 0px" class="form-group form-md-line-input has-info sidebar-search-wrapper">
+        <div class="form-group form-md-line-input has-info sidebar-search-wrapper dao-sidebar-search">
             <div class="input-group">
-                <input type="text" class="form-control" id="search_menu" placeholder="{{trans('orbscope.search_menu')}}">
+                <input type="text" class="form-control" id="search_menu" placeholder="{{trans('orbscope.search_menu')}}" aria-label="{{trans('orbscope.search_menu')}}">
                 <span class="input-group-addon">
                     <i class="fa fa-search"></i>
                 </span>
             </div>
         </div>
-        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+        <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
             <li class="sidebar-toggler-wrapper hide">
                 <div class="sidebar-toggler">
                     <span></span>
@@ -166,7 +166,7 @@
 
                 <li class="nav-item {{ (request()->is('admin/money_transfers*')) ? 'active' : '' }}">
                     <a href="javascript:" class="nav-link nav-toggle">
-                        <i class="fa fa-dollor"></i>
+                        <i class="fa fa-money"></i>
                         <span class="title">{{trans('orbscope.money_transfers')}}</span>
                         <span class="arrow {{ ActiveLink('money_transfers') }}"></span>
                     </a>

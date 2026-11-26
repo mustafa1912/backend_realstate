@@ -17,9 +17,13 @@
     <link href="{{url('orbscope/admin')}}/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
     {!! Html::style('orbscope/admin/assets/global/plugins/bootstrap-sweetalert/sweetalert.css') !!}
     {!! Html::style('orbscope/admin/assets/global/custom.css') !!}
-    <link rel="shortcut icon" href="{{ShowImage(GetSettings()->icon)}}"/>
+    <link rel="shortcut icon" href="{{ asset('images/brand/favicon.ico') }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('images/brand/favicon.png') }}"/>
     <link rel="stylesheet" href="{{url('orbscope/admin')}}/magnific-popup/magnific-popup.css">
-    <link href="https://fonts.googleapis.com/css?family=Changa&display=swap&subset=arabic" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Cairo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/daralomran-theme.css') }}?v={{ file_exists(public_path('css/daralomran-theme.css')) ? filemtime(public_path('css/daralomran-theme.css')) : 1 }}" rel="stylesheet" type="text/css"/>
 
     <style>
     .special-image {

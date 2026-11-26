@@ -44,6 +44,26 @@
     $(document).on('click', 'button[type=reset]', function() {
         $('select').val("").trigger('change');
     });
+
+    /* Dar Al Omran: File upload filename display & drag highlight */
+    $(document).on('change', '.dao-upload-zone input[type="file"]', function() {
+        var $zone = $(this).closest('.dao-upload-zone');
+        var files = this.files;
+        var label = '';
+        if (files && files.length > 1) {
+            label = files.length + ' files';
+        } else if (files && files.length === 1) {
+            label = files[0].name;
+        }
+        var $name = $zone.find('.dao-upload-filename');
+        if (label) {
+            $name.text(label).addClass('has-file');
+            $zone.addClass('has-file');
+        } else {
+            $name.text($name.data('empty') || '').removeClass('has-file');
+            $zone.removeClass('has-file');
+        }
+    });
 </script>
 
 

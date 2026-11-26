@@ -10,20 +10,20 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="col-xs-4">
-                    <h3>اكسبرس للعقارات</h3>
+                    <h3>دار العمران للاستثمار العقاري</h3>
                     <h4><i class="fa fa-phone"></i>:+97167442616</h4>
                     <h4><i class="fa fa-fax"></i>:2322</h4>
                     <h5>عجمان - ا.ع.م</h5>
 
                 </div>
                 <div class="col-xs-4 ">
-                    <img style="height: 160px;margin-right: 20px;" src="{{ShowImage(GetSettings()->logo)}}">
+                    <img style="height: 140px;margin-inline-end: 20px;" src="{{asset('images/brand/logo.png')}}" alt="Dar Al Omran">
 
                     <h4> ere.ajman@gmail.com <i class="fa fa-envelope"></i></h4>
 
                 </div>
                 <div class="col-xs-4">
-                    <h3>EXPRESS realstate</h3>
+                    <h3>Dar Al Omran Real Estate</h3>
                     <h4><i class="fa fa-phone"></i>:+97167442616</h4>
                     <h4><i class="fa fa-fax"></i>:2322</h4>
                     <h5>Ajman-U.A.E</h5>
