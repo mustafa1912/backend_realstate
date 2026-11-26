@@ -10,10 +10,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build: 
     runs-on: ubuntu-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -23,22 +23,20 @@ jobs:
         with:
           php-version: '8.3'
 
-      - name: Check if composer.json exists
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: 'composer.json'
+      - name: Composer install
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress
 
-      - name: Run composer install if composer.json exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
+      - name: Fix line endings
+        run: sed -i 's/\r$//' startup.sh default
 
+      - name: Zip app
+        run: zip -r release.zip . -x ".git/*" "tests/*" "*.sql" "node_modules/*"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: php-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,5 +64,5 @@ jobs:
         with:
           app-name: 'realstate'
           slot-name: 'Production'
-          package: .
+          package: release.zip
           
