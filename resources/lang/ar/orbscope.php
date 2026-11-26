@@ -99,7 +99,7 @@
             'back'              => 'رجوع',
             'hall'              => 'صالة',
             'flat_type'              => 'نوع الوحدة',
-            'flat_types'              => 'انوع الوحدات',
+            'flat_types'              => 'أنواع الوحدات',
             'sewage_meter'              => 'عداد الصرف الصحي',
             'electric_meter'              => 'عداد الكهراباء',
             'water_meter'              => 'عداد المياه',

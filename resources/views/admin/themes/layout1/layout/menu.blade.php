@@ -66,7 +66,7 @@
                     </ul>
                 </li>
 
-            <li class="nav-item {{ (request()->is('admin/units*')) ? 'active' : '' }}  {{ (request()->is('admin/service_contracts*')) ? 'active' : '' }}  {{ (request()->is('admin/flats*')) ? 'active' : '' }} {{ActiveLink(url('admin/upload/units'),url('admin/upload/apartments'))}}">
+            <li class="nav-item {{ (request()->is('admin/units*')) ? 'active' : '' }}  {{ (request()->is('admin/service_contracts*')) ? 'active' : '' }}  {{ (request()->is('admin/flats*')) ? 'active' : '' }} {{ (request()->is('admin/flat_type*')) ? 'active open' : '' }} {{ActiveLink(url('admin/upload/units'),url('admin/upload/apartments'))}}">
                     <a href="javascript:" class="nav-link nav-toggle">
                         <i class="fa fa-building-o"></i>
                         <span class="title">{{trans('orbscope.units')}}</span>
@@ -84,6 +84,24 @@
                         <li class="nav-item  {{ActiveLink(url('admin/units'))}}">
                             <a href="{{url(AdminUrl('units'))}}" class="nav-link ">
                                 <span class="title">{{trans('orbscope.show-all')}} {{trans('orbscope.units')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ (request()->is('admin/flats') || request()->is('admin/flats/*')) ? 'active' : '' }}">
+                            <a href="{{url(AdminUrl('flats'))}}" class="nav-link ">
+                                <span class="title">{{trans('orbscope.show-all')}} {{trans('orbscope.apartments')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ (request()->is('admin/flat_type') || request()->is('admin/flat_type/*/edit')) ? 'active' : '' }}">
+                            <a href="{{url(AdminUrl('flat_type'))}}" class="nav-link ">
+                                <span class="title">{{trans('orbscope.flat_types')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ActiveLink(url('admin/flat_type/create'))}}">
+                            <a href="{{url(AdminUrl('flat_type/create'))}}" class="nav-link ">
+                                <span class="title">{{trans('orbscope.add')}} {{trans('orbscope.flat_type')}}</span>
                             </a>
                         </li>
 
@@ -305,7 +323,7 @@
                     <h3 class="uppercase">{{trans('log.settings')}}</h3>
                 </li>
 
-                <li class="nav-item {{ActiveLink(url(AdminPath().'/settings'))}} {{ (request()->is('admin/cities*')) ? 'active' : '' }} {{ (request()->is('admin/unitTypes*')) ? 'active' : '' }}  {{ (request()->is('admin/services*')) ? 'active' : '' }} {{ (request()->is('admin/order_type*')) ? 'active' : '' }} {{ (request()->is('admin/flat_type*')) ? 'active' : '' }} {{ (request()->is('admin/hoods*')) ? 'active' : '' }}">
+                <li class="nav-item {{ActiveLink(url(AdminPath().'/settings'))}} {{ (request()->is('admin/cities*')) ? 'active' : '' }} {{ (request()->is('admin/unitTypes*')) ? 'active' : '' }}  {{ (request()->is('admin/services*')) ? 'active' : '' }} {{ (request()->is('admin/order_type*')) ? 'active' : '' }} {{ (request()->is('admin/hoods*')) ? 'active' : '' }}">
                     <a href="{{url(AdminPath().'/settings')}}" class="nav-link nav-toggle">
                         <i class="fa fa-cog"></i>
                         <span class="title">{{trans('log.settings')}}</span>

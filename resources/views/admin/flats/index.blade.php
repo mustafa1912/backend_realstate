@@ -42,6 +42,7 @@
                     </a>
                 </div>
 
+                @isset($unit)
                 <ul class="nav nav-tabs nav-tabs-lg" style="margin-bottom: 58px;">
                     <li @if(url(AdminPath().'/units/'.$unit->id) == URL::current()) class="active" @endif>
                         <a href="{{url(AdminPath().'/units/'.$unit->id)}}" >{{trans('orbscope.property_information')}}</a>
@@ -58,20 +59,15 @@
                     <li @if(url(AdminPath().'/units/'.$unit->id.'/lease_contracts') == URL::current()) class="active" @endif>
                         <a href="{{url(AdminPath().'/units/'.$unit->id.'/lease_contracts')}}" >{{trans('orbscope.lease_contracts')}}</a>
                     </li>
-                  <!---
-                    <li @if(url(AdminPath().'/units/'.$unit->id.'/deportation') == URL::current()) class="active" @endif>
-                        <a href="{{url(AdminPath().'/units/'.$unit->id.'/deportation')}}" >الترحيل  </a>
-                    </li>--->
-
-
                 </ul>
+                @endisset
 
                 <div class="portlet-body">
 
 
                     {!! Form::open([
                        'method' => 'post',
-                       'url' => [AdminPath().'/flats/multi_edit/'.$unit->id],'id'=>'multi_edit'
+                       'url' => [AdminPath().'/flats/multi_edit/'.(isset($unit) ? $unit->id : 0)],'id'=>'multi_edit'
                        ]) !!}
                     {!! $dataTable->table(['class'=> 'table table-striped table-bordered table-hover'],true) !!}
 
@@ -82,7 +78,11 @@
         <script>
 
             $(document).on('click', '.createBtn', function() {
+                @isset($unit)
                 window.location = "{{url('admin/units/'.$unit->id.'/add_flat')}}";
+                @else
+                window.location = "{{url('admin/flats/create')}}";
+                @endisset
             });
             $(document).on('click', '.uploadBtn', function() {
                 window.location = "flats/upload";
