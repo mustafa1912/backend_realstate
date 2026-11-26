@@ -24,8 +24,8 @@ jobs:
           php-version: '8.3'
 
       - name: Composer install
-        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress
-
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress --no-scripts
+        
       - name: Fix line endings
         run: sed -i 's/\r$//' startup.sh default
 
