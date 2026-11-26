@@ -1,48 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Setting;
-use App\Http\Controllers\Controller;
-use App\Models\Service;
-use Illuminate\Http\Request;
-use Auth;
-use Session;
-use File;
-use Intervention\Image\ImageManager;
-use Validator;
+
+use Illuminate\Http\RedirectResponse;
 
 class FrontendController extends Controller
 {
+    /**
+     * Redirect the application root directly to the admin dashboard (if authenticated)
+     * or the admin login page (if guest).
+     */
+    public function index(): RedirectResponse
+    {
+        if (auth()->check()) {
+            return redirect(AdminPath());
+        }
 
-
-    public function index(){
-
-        $show=Setting::first();
-       return view('front.contact',compact('show'));
+        return redirect(AdminPath() . '/login');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

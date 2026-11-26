@@ -23,6 +23,9 @@ class AdminController extends Controller
     // Admin Login Page
     public function Login()
     {
+        if (auth()->check()) {
+            return redirect(AdminPath());
+        }
 
         return view(AdminTheme().'.login');
     }

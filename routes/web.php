@@ -22,12 +22,8 @@ Route::get('/clear_cache', function () {
     dd("Cache is cleared");
 
 });
-Route::get('/', [Controllers\FrontendController::class, 'Index']);
-Route::post('/contact', [Controllers\FrontendController::class, 'contact_us']);
+Route::get('/', [Controllers\FrontendController::class, 'index']);
 Route::get('/lang/{lang?}', [Controllers\SettingsController::class, 'ChangeLanguage']);
-Route::resource('maintenance_form', Controllers\MaintenanceFormController::class)->only([
-    'store'
-]);
 
 
 
